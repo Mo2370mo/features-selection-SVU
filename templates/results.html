@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="card">
+    <h2>نتائج المعاينة</h2>
+    {% if info %}
+    <p>الملف: <strong>{{info.filename}}</strong></p>
+    <p> الصفوف: {{info.rows}} | الأعمدة: {{info.cols}}</p>
+    <a href="{{url_for('process_file', filename=info.filename)}}" class="button-outline"> معالجة </a>
+    {% endif %}
+    
+    {% if preview  %}
+    <div class="table-container">{{preview|safe}}</div>
+    {% else %}
+    <p>لا توجد نتائج بعد. ارفع ملفا من صفحة الرفع</p>
+    {% endif %}
+</section>
+{% endblock %}
