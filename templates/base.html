@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>اختيار الميزات بالخوارزمية الجينية</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
     <header>
@@ -12,9 +13,10 @@
 
     <nav>
         <a href="/">الرئيسية</a>
-        <a href="/">رفع ملف</a>
-        <a href="/">النتائج</a>
-        <a href="/">المقارنة</a>
+        <a href="/upload">رفع ملف</a>
+        <a href="/results">النتائج</a>
+        <a href="/compare">المقارنة</a>
+        <a href="/docs">التوثيق</a>
     </nav>
     <main>
         {% with messages = get_flashed_messages() %}
