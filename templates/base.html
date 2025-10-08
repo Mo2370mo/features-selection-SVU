@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>اختيار الميزات بالخوارزمية الجينية</title>
+</head>
+<body>
+    <header>
+        <h1>اختيار الميزات بالخوارزمية الجينية</h1>
+    </header>
+
+    <nav>
+        <a href="/">الرئيسية</a>
+        <a href="/">رفع ملف</a>
+        <a href="/">النتائج</a>
+        <a href="/">المقارنة</a>
+    </nav>
+    <main>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="alert">
+            {% for message in messages %}
+                <p>{{ message }}</p>
+            {% endfor %}
+            </div>
+        {% endif %}
+        {% endwith %}
+        {% block content %}{% endblock %}
+    </main>
+    <footer>
+        <p>مشروع مادة BIA601 - جامعة SVU</p>
+    </footer>
+</body>
+</html>
