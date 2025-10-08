@@ -12,20 +12,32 @@
     </header>
 
     <nav>
-        <a href="/">الرئيسية</a>
-        <a href="/upload">رفع ملف</a>
-        <a href="/results">النتائج</a>
-        <a href="/compare">المقارنة</a>
-        <a href="/docs">التوثيق</a>
+        <nav>
+  <a href="{{ url_for('index') }}"
+     class="{% if request.endpoint == 'index' %}active{% endif %}">الرئيسية</a>
+
+  <a href="{{ url_for('upload') }}"
+     class="{% if request.endpoint == 'upload' %}active{% endif %}">رفع ملف</a>
+
+  <a href="{{ url_for('results') }}"
+     class="{% if request.endpoint == 'results' %}active{% endif %}">النتائج</a>
+
+  <a href="{{ url_for('compare') }}"
+     class="{% if request.endpoint == 'compare' %}active{% endif %}">المقارنة</a>
+
+  <a href="{{ url_for('docs') }}"
+     class="{% if request.endpoint == 'docs' %}active{% endif %}">التوثيق</a>
+</nav>
+
     </nav>
     <main>
-        {% with messages = get_flashed_messages() %}
+        {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
-            <div class="alert">
-            {% for message in messages %}
-                <p>{{ message }}</p>
+            
+            {% for category, message in messages %}
+                <div class="alert {{category}} ">{{message}}</div>
             {% endfor %}
-            </div>
+           
         {% endif %}
         {% endwith %}
         {% block content %}{% endblock %}

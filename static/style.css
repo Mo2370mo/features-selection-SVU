@@ -15,7 +15,7 @@ header {
 nav {
   background-color: #444;
   text-align: center;
-  padding: 10px 0;
+  padding: 10px 20px;
 }
 
 nav a {
@@ -26,7 +26,11 @@ nav a {
 }
 
 nav a:hover {
-  text-decoration: underline;
+  background-color: #0078d4;
+  text-decoration: none;
+  color: white;
+  padding: 6px 10px;
+  border-radius: 4px;
 }
 
 main {
@@ -51,7 +55,20 @@ footer {
   border-radius: 8px;
   box-shadow: 0 0 5px rgba(0,0,0,0.1);
   margin-bottom: 60px;
+  text-align: right;
+
 }
+
+ul, ol {
+    direction: rtl;
+    text-align: right;
+    padding-right: 25px;
+    padding-left: 0;
+    list-style-position: inside;
+}
+ li{
+    margin-bottom: 6px;
+ }
 
 .button {
   display: inline-block;
@@ -87,6 +104,17 @@ footer {
   margin-bottom: 15px;
 }
 
+.alert.error {
+    background-color: #ffcccc;
+    color: #a10000;
+    border: 1px solid #a10000;
+}
+.alert.success {
+    background-color: #ccffcc;
+    color: #006600;
+    border: 1px solid #006600;
+}
+
 .table-container {
   overflow-x: auto;
   margin-top: 10px;
@@ -95,4 +123,10 @@ footer {
 .note {
   font-size: 0.9em;
   color: #555;
+}
+nav a.active {
+  background-color: #0078d4;
+  color: white;
+  padding: 6px 10px;
+  border-radius: 4px;
 }

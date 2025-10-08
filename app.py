@@ -28,10 +28,10 @@ def upload():
     if request.method == "POST":
         file = request.files.get("file")
         if not file or file.filename == "":
-            flash("الرجاء اختيار ملف CSV.")
+            flash("الرجاء اختيار ملف CSV.", "error")
             return redirect(request.url)
         if not allowed_file(file.filename):
-            flash("يسمح فقط بملفات CSV.")
+            flash("يسمح فقط بملفات CSV.", "error")
             return redirect(request.url)
 
         filename = secure_filename(file.filename)
@@ -42,8 +42,10 @@ def upload():
         try:
             df = pd.read_csv(path, encoding_errors="ignore")
         except Exception as e:
-            flash(f"خطأ في قراءة الملف: {e}")
+            flash(f"خطأ في قراءة الملف: {e}", "error")
             return redirect(request.url)
+        
+        flash("تم رفع الملف بنجاح.", "success")
 
         preview = df.to_html(classes="table-container", index=False)
         info = {"filename": saved_name, "rows": df.shape[0], "cols": df.shape[1]}
