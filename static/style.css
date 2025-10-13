@@ -133,3 +133,20 @@ nav a.active {
   padding: 6px 10px;
   border-radius: 4px;
 }
+
+.compare-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+  text-align: center;
+}
+
+.compare-table th, .compare-table td {
+  border: 1px solid #ccc;
+  padding: 8px;
+}
+
+.compare-table th {
+  background-color: #0078d4;
+  color: white;
+}
