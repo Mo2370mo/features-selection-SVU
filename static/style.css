@@ -134,19 +134,19 @@ nav a.active {
   border-radius: 4px;
 }
 
-.compare-table {
+.comparison-table {
   width: 100%;
   border-collapse: collapse;
   margin-top: 15px;
   text-align: center;
 }
 
-.compare-table th, .compare-table td {
+.comparison-table th, .comparison-table td {
   border: 1px solid #ccc;
   padding: 8px;
 }
 
-.compare-table th {
+.comparison-table th {
   background-color: #0078d4;
   color: white;
 }
