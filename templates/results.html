@@ -1,17 +1,75 @@
 {% extends "base.html" %}
 {% block content %}
+
+
 <section class="card">
-    <h2>نتائج المعاينة</h2>
-    {% if info %}
-    <p>الملف: <strong>{{info.filename}}</strong></p>
-    <p> الصفوف: {{info.rows}} | الأعمدة: {{info.cols}}</p>
-    <a href="{{url_for('process_file', filename=info.filename)}}" class="button-outline"> معالجة </a>
-    {% endif %}
-    
-    {% if preview  %}
-    <div class="table-container">{{preview|safe}}</div>
-    {% else %}
-    <p>لا توجد نتائج بعد. ارفع ملفا من صفحة الرفع</p>
-    {% endif %}
+  <h2>نتائج المعاينة</h2>
+
+  {% if info %}
+    <p>الملف: <strong>{{ info.filename }}</strong></p>
+    <p>الصفوف: {{ info.rows }} | الأعمدة: {{ info.cols }}</p>
+  {% endif %}
+
+  {% if preview %}
+    <div style="max-height:400px; overflow-y:auto; border:1px solid #ddd; border-radius:6px;">
+      <div class="table-container" style="min-width:100%; overflow-x:auto;">
+        {{ preview|safe }}
+      </div>
+    </div>
+  {% endif %}
+
+  {% if not preview and not info %}
+    <p>لم يتم تحميل أي ملف بعد. ارفع ملفاً من صفحة الرفع.</p>
+  {% endif %}
 </section>
+
+
+{% if selected_preview %}
+<section class="card">
+  <h3>البيانات بعد اختيار الميزات (Feature Subset)</h3>
+  <div style="max-height:400px; overflow-y:auto; border:1px solid #ddd; border-radius:6px;">
+    {{ selected_preview|safe }}
+  </div>
+</section>
+{% endif %}
+
+
+{% if results %}
+<section class="card active">
+  <h2> (GA) نتائج الخوارزمية الجينية </h2>
+
+  <table class="comparison-table">
+    <thead>
+      <tr><th>المعيار</th><th>القيمة</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>عدد الميزات المختارة</td><td>{{ results.features }}</td></tr>
+      <tr><td>دقة النموذج (%)</td><td>{{ results.accuracy }}</td></tr>
+      <tr><td>زمن التنفيذ (ث)</td><td>{{ results.time }}</td></tr>
+      {% if results.best_fitness %}
+      <tr><td>أفضل لياقة محققة</td><td>{{ results.best_fitness }}</td></tr>
+      {% endif %}
+      {% if results.best_generation %}
+      <tr><td>الجيل الذي حقق أفضل لياقة</td><td>{{ results.best_generation }}</td></tr>
+      {% endif %}
+      {% if results.avg_fitness_final %}
+      <tr><td>متوسط اللياقة في آخر جيل</td><td>{{ results.avg_fitness_final }}</td></tr>
+      {% endif %}
+
+    </tbody>
+  </table>
+
+  {% if results.plot %}
+    <h3>تطور اللياقة عبر الأجيال</h3>
+    <img src="data:image/png;base64,{{ results.plot }}" style="width:100%; border-radius:8px; margin-bottom:20px;">
+  {% endif %}
+
+  <div style="text-align:center; margin-top:20px;">
+    <a href="{{ url_for('compare') }}" class="button">عرض المقارنة مع الطرق التقليدية</a>
+  </div>
+</section>
+{% endif %}
+
+
+
 {% endblock %}
