@@ -6,3 +6,6 @@ logs/
 *.zip
 *.pdf
 *.rar
+README_chromosome.md
+chromosome-design.py
+chromosome_output.txt
