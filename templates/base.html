@@ -25,6 +25,9 @@
   <a href="{{ url_for('compare') }}"
      class="{% if request.endpoint == 'compare' %}active{% endif %}">المقارنة</a>
 
+       <a href="{{ url_for('history') }}"
+     class="{% if request.endpoint == 'history' %}active{% endif %}">الأرشيف</a>
+
   <a href="{{ url_for('docs') }}"
      class="{% if request.endpoint == 'docs' %}active{% endif %}">التوثيق</a>
   </nav>
@@ -42,9 +45,9 @@
         {% endwith %}
         {% block content %}{% endblock %}
     </main>
-    <footer>
+    <!-- <footer>
         <p>مشروع مادة BIA601 - جامعة SVU</p>
-    </footer>
+    </footer> -->
     
 <script src="{{ url_for('static', filename='scripts.js') }}"></script>
 </body>
