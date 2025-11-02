@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="card">
+  <h2>أرشيف النتائج السابقة</h2>
+
+  {% if history %}
+  <table class="comparison-table">
+    <thead>
+      <tr>
+        <th>اسم الملف</th>
+        <th>العمود الهدف</th>
+        <th>عدد الميزات</th>
+        <th>الدقة (%)</th>
+        <th>زمن التنفيذ (ث)</th>
+        <th>أفضل لياقة</th>
+        <th>أفضل جيل</th>
+        <th>متوسط اللياقة الأخير</th>
+        <th>عرض مقارنة</th>
+      </tr>
+    </thead>
+    <tbody>
+     {% for item in history %}
+     <tr>
+       <td>{{ item.filename }}</td>
+       <td>{{ item.target }}</td>
+       <td>{{ item.features }}</td>
+       <td>{{ item.accuracy }}</td>
+       <td>{{ item.time }}</td>
+       <td>{{ item.best_fitness or '-' }}</td>
+       <td>{{ item.best_generation or '-' }}</td>
+       <td>{{ item.avg_fitness_final or '-' }}</td>
+       <td>
+        <a href="{{ url_for('compare_file', filename=item.filename.replace('.csv', '_result.json')) }}" class="button">
+         مقارنة
+        </a>
+    </td>
+      </tr>
+     {% endfor %}
+    </tbody>
+
+  </table>
+  {% else %}
+  <p>لا توجد نتائج محفوظة بعد.</p>
+  {% endif %}
+</section>
+{% endblock %}
