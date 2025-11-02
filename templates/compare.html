@@ -1,38 +1,59 @@
 {% extends "base.html" %}
 {% block content %}
-<section class="card">
-    <h2>صفحة المقارنة</h2>
-     <p>مقارنة النتائج الخوارزمية الجينية مع الطرق التقليدية</p>
 
-     <table class="comparison-table">
-        <thead>
-            <tr>
-                <th>المعيار</th>
-                <th>الخوارزمية الجينية GA </th>
-                <th>الطريقة التقليدية</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>عدد الميزات المختارة</td>
-                <td>12</td>
-                <td>25</td>
-            </tr>
-            <tr>
-                <td>الدقة (%)</td>
-                <td>90</td>
-                <td>80</td>
-            </tr>
-            <tr>
-                <td>زمن التنفيذ (ث)</td>
-                <td>3.4</td>
-                <td>2.8</td>
-            </tr>
-            <tr>
-                <td>تحسين الأداء</td>
-                <td colspan="2" >+4.2% باستخدام GA </td>
-            </tr>
-        </tbody>
-     </table>
+<section class="card">
+  <h2>مقارنة الخوارزمية الجينية مع الطرق التقليدية</h2>
+
+  {% if results %}
+  
+  <h3>(GA) نتائج الخوارزمية الجينية </h3>
+  <table class="comparison-table">
+    <thead>
+      <tr>
+        <th>المعيار</th>
+        <th>القيمة</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>عدد الميزات المختارة</td><td>{{ results.features }}</td></tr>
+      <tr><td>دقة النموذج (%)</td><td>{{ results.accuracy }}</td></tr>
+      <tr><td>زمن التنفيذ (ث)</td><td>{{ results.time }}</td></tr>
+    </tbody>
+  </table>
+
+
+  {% endif %}
 </section>
+
+
+<section class="card">
+  <h3>مقارنة مع الطرق التقليدية</h3>
+  {% if comparison %}
+  <table class="comparison-table">
+    <thead>
+      <tr>
+        <th>الطريقة</th>
+        <th>عدد الميزات المختارة</th>
+        <th>دقة النموذج (%)</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for key, m in comparison.items() %}
+      <tr>
+        <td>{{ m.name }}</td>
+        <td>{{ m.features }}</td>
+        <td>{{ (m.accuracy * 100) | round(2) }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+  <p>لا توجد بيانات مقارنة بعد. قم بتنفيذ المعالجة أولاً.</p>
+  {% endif %}
+</section>
+
+<div style="text-align:center; margin-top:20px;">
+  <a href="{{ url_for('results') }}" class="button-outline">عودة إلى نتائج GA</a>
+</div>
+
 {% endblock %}
