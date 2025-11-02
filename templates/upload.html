@@ -1,10 +1,32 @@
-{%extends "base.html"%}
+{% extends "base.html" %}
 {% block content %}
+
 <section class="card">
-    <h2>رفع ملف CSV او قاعدة البيانات</h2>
-    <form action="" method="post" enctype="multipart/form-data">
-        <input type="file" name="file" accept=".csv">
-        <button type="submit" class="button" >رفع</button>
-    </form>
+  <h2>CSV رفع ملف </h2>
+
+  <form action="{{ url_for('upload') }}" method="post" enctype="multipart/form-data">
+    <input type="file" name="file" accept=".csv">
+    <button type="submit" class="button">رفع الملف</button>
+  </form>
+
+  {% if info %}
+  <hr>
+  <h3>تفاصيل الملف:</h3>
+  <p>الملف: <strong>{{ info.filename }}</strong></p>
+  <p>الصفوف: {{ info.rows }} | الأعمدة: {{ info.cols }}</p>
+
+  <div style="max-height:400px; overflow-y:auto; border:1px solid #ddd; border-radius:6px;">
+  <div class="table-container" style="min-width:100%; overflow-x:auto;">
+    {{ preview|safe }}
+  </div>
+  </div>
+
+  <div style="text-align:center; margin-top:15px;">
+    <a href="{{ url_for('process_file', filename=info.filename) }}" class="button-outline">
+      بدء المعالجة
+    </a>
+  </div>
+  {% endif %}
 </section>
+
 {% endblock %}
