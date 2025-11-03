@@ -20,7 +20,7 @@ import matplotlib
 matplotlib.use("Agg")
 class GeneticFeatureSelector(BaseEstimator, TransformerMixin):
 
-    def init(self, estimator, population_size=50, n_generations=20,
+    def __init__(self, estimator, population_size=50, n_generations=20,
                  crossover_probability=0.8, mutation_probability=0.05,
                  tournament_size=3, alpha=0.9, cv=5, random_state=None,
                  verbose=1):
