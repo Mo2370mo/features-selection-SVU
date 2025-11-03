@@ -102,7 +102,7 @@ class GeneticFeatureSelector(BaseEstimator, TransformerMixin):
             chromosome[self.rng.integers(0, self.n_features_total_)] = 1
             
         return chromosome
-        def fit(self, X, y):
+    def fit(self, X, y):
         self.n_features_total_ = X.shape[1]
         
         self.population_ = self._initialize_population()
@@ -193,7 +193,8 @@ def load_and_prepare_data(filepath, target_column):
 
     print(f"✅ تم تجهيز البيانات. عدد الصفوف: {df.shape[0]}, عدد الميزات بعد المعالجة: {X.shape[1]}")
     return X.values, np.asarray(y)
-    def evaluate_model(X_train, X_test, y_train, y_test, estimator, method_name):
+
+def evaluate_model(X_train, X_test, y_train, y_test, estimator, method_name):
     n_features = X_train.shape[1]
     
     if n_features == 0:
@@ -210,6 +211,8 @@ def load_and_prepare_data(filepath, target_column):
         accuracy = 0.0
         
     return accuracy, n_features
+
+
 
 def run_feature_selection(X_train, X_test, y_train, y_test, base_estimator, ga_n_features):
     """مقارنة الطرق التقليدية لاختيار الميزات"""
@@ -344,7 +347,7 @@ def run_genetic_algorithm(csv_path, target_column=None):
 
 
 
-if name == "main":
+if __name__ == "main":
     parser = argparse.ArgumentParser(
         description="Genetic Algorithm Feature Selector and Comparison Tool",
         formatter_class=argparse.RawTextHelpFormatter
