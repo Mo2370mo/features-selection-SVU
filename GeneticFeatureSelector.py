@@ -156,6 +156,7 @@ def load_and_prepare_data(filepath, target_column):
     # تحميل ومعالجة البيانات من ملف CSV
     try:
         df = pd.read_csv(filepath, encoding_errors="ignore")
+        df = df.dropna(axis=1, how='all')
     except Exception as e:
         print(f" خطأ في تحميل الملف: {e}")
         return None, None
